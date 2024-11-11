@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
+let Locations;
+
 const addressSchema = new mongoose.Schema({
   line1: { type: String, required: true },
   line2: { type: String, required: true },
@@ -83,7 +85,8 @@ locationSchema.index({ location: '2dsphere' });
 
 locationSchema.plugin(mongoosePaginate);
 
-// Create the location model based on the schema
-const Locations = mongoose.model("Locations", locationSchema);
-
+if (!Locations) {
+    // Create the location model based on the schema
+    Locations = mongoose.model("Locations", locationSchema);
+}
 export default Locations;

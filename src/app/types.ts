@@ -4,5 +4,5 @@ export interface IAttraction {
     image: string;
     title: string;
     description: string;
-    labels: string[]
+    categories: string[]
 }
