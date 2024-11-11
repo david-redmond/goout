@@ -1,6 +1,9 @@
-// app/components/Hero.tsx
+'use client'
+// app/components/HeroCarousel.tsx
 import React from 'react';
-import { Box, Grid, Typography, Link } from '@mui/material';
+import { Box, Link } from '@mui/material';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const heroImages = [
     { src: '/images/buddy-photo-a0GqlDmKnUY-unsplash.jpg', link: '/page1', alt: 'Beautiful Beach', title: 'Discover Beaches' },
@@ -10,42 +13,18 @@ const heroImages = [
 
 ];
 
-const Hero = () => {
+const HeroCarousel = () => {
     return (
-        <Box sx={{ width: '100%', mt: 4 }}>
-            <Grid container spacing={2}>
-                {heroImages.map((image, index) => (
-                    <Grid item xs={12} sm={4} key={index}>
-                        <Link href={image.link} underline="none" sx={{ display: 'block' }}>
-                            <Box
-                                component="img"
-                                src={image.src}
-                                alt={image.alt}
-                                sx={{
-                                    width: '100%',
-                                    height: { xs: '200px', sm: '250px', md: '300px' },
-                                    objectFit: 'cover',
-                                    borderRadius: 1,
-                                }}
-                            />
-                            <Typography
-                                variant="h6"
-                                align="center"
-                                sx={{
-                                    mt: 1,
-                                    color: 'primary.main',
-                                    fontWeight: 'bold',
-                                    textTransform: 'uppercase',
-                                }}
-                            >
-                                {image.title}
-                            </Typography>
-                        </Link>
-                    </Grid>
+        <Box>
+            <Carousel showThumbs={false} infiniteLoop autoPlay>
+                {heroImages.map((item, index) => (
+                    <Link href={item.link} key={index}>
+                        <img src={item.src} alt={`Slide ${index + 1}`} style={{ width: '100%', height: 'auto', maxHeight: '90vh' }} />
+                    </Link>
                 ))}
-            </Grid>
+            </Carousel>
         </Box>
     );
 };
 
-export default Hero;
+export default HeroCarousel;
